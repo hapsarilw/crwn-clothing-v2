@@ -37,8 +37,11 @@ export const auth = getAuth();
 export const signInWithGoogleRedirect = () =>
   signInWithRedirect(auth, googleProvider);
 
-export const createUserDocumentFromAuth = async (userAuth) => {
-  if(!userAuth) return; // If don't have value -> not running function
+export const createUserDocumentFromAuth = async (
+  userAuth,
+  additionalInformation 
+) => {
+  if (!userAuth) return; // If don't have value -> not running function
   // giving doc inside db under users with uid
   const userDocRef = doc(db, "users", userAuth.uid);
 
@@ -54,6 +57,7 @@ export const createUserDocumentFromAuth = async (userAuth) => {
         displayName,
         email,
         createdAt,
+        ...additionalInformation,
       });
     } catch (error) {
       console.log("error creating the user", error.mesaage);
@@ -64,6 +68,6 @@ export const createUserDocumentFromAuth = async (userAuth) => {
 };
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
-  if(!email || !password) return; //not call a method
+  if (!email || !password) return; //not call a method
   return await createUserWithEmailAndPassword(auth, email, password);
 };
