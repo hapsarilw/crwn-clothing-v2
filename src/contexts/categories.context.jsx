@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+ import { createContext, useState, useEffect } from "react";
 
 import { getCategoriesAndDocuments } from "../utils/firebase/firebase.utils";
 
